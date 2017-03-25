@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="aiC-LW-JGu">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Delegate-->
+        <scene sceneID="aea-WA-K8g">
+            <objects>
+                <viewController id="aiC-LW-JGu" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qz2-Fw-utY"/>
+                        <viewControllerLayoutGuide type="bottom" id="NCv-hc-X5g"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="s4i-yG-sID">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="l1E-JK-fGv" customClass="KBImageView">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="timePerImage">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="delegate" destination="aiC-LW-JGu" id="8Mn-di-7wz"/>
+                                </connections>
+                            </imageView>
+                            <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S9c-pV-JzX">
+                                <rect key="frame" x="37" y="209" width="300" height="200"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="R9J-Ov-8iP">
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="200"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Please enter your email:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hfd-OT-03O">
+                                            <rect key="frame" x="5" y="33" width="290" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="gzV-wG-Cxm"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="hfd-OT-03O" firstAttribute="leading" secondItem="R9J-Ov-8iP" secondAttribute="leading" constant="2" id="9eU-qv-4iV"/>
+                                        <constraint firstAttribute="trailing" secondItem="hfd-OT-03O" secondAttribute="trailing" constant="8" id="b9E-jP-sNk"/>
+                                        <constraint firstItem="hfd-OT-03O" firstAttribute="top" secondItem="R9J-Ov-8iP" secondAttribute="top" constant="48" id="qf5-Ea-jeJ"/>
+                                    </constraints>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="9O3-g5-1tJ"/>
+                                    <constraint firstAttribute="height" constant="200" id="Wbc-fi-fAS"/>
+                                </constraints>
+                                <blurEffect style="dark"/>
+                            </visualEffectView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="S9c-pV-JzX" firstAttribute="centerX" secondItem="s4i-yG-sID" secondAttribute="centerX" id="0uF-xK-aXz"/>
+                            <constraint firstItem="l1E-JK-fGv" firstAttribute="top" secondItem="s4i-yG-sID" secondAttribute="top" id="4OH-0g-hMa"/>
+                            <constraint firstItem="l1E-JK-fGv" firstAttribute="leading" secondItem="s4i-yG-sID" secondAttribute="leading" id="9n7-Am-WXV"/>
+                            <constraint firstAttribute="trailing" secondItem="l1E-JK-fGv" secondAttribute="trailing" id="TfZ-qp-oVK"/>
+                            <constraint firstItem="S9c-pV-JzX" firstAttribute="centerY" secondItem="s4i-yG-sID" secondAttribute="centerY" identifier="centerY" id="iW5-Q7-qf6"/>
+                            <constraint firstItem="NCv-hc-X5g" firstAttribute="top" secondItem="l1E-JK-fGv" secondAttribute="bottom" id="qd8-R1-97v"/>
+                        </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="dTK-BX-6Sh" appends="YES" id="JFZ-jT-izR"/>
+                        </connections>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="l1E-JK-fGv" id="Ubu-Qw-AzV"/>
+                        <outlet property="view" destination="s4i-yG-sID" id="POW-7j-8re"/>
+                        <outlet property="visualEffectView" destination="S9c-pV-JzX" id="DM0-4v-Xi0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lRe-6J-DbL" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="dTK-BX-6Sh">
+                    <connections>
+                        <action selector="hideKeyboard:" destination="aiC-LW-JGu" id="O1t-hi-tbf"/>
+                        <outlet property="delegate" destination="aiC-LW-JGu" id="jD2-U9-cBd"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="-311.19999999999999" y="133.5832083958021"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="1" width="16" height="16"/>
+    </resources>
+</document>
