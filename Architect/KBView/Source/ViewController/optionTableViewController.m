@@ -1,0 +1,103 @@
+//
+//  optionTableViewController.m
+//  KBView
+//
+//  Created by EXCAVUS TECHNOLOGIES on 27/03/17.
+//  Copyright © 2017 Nick. All rights reserved.
+//
+
+#import "optionTableViewController.h"
+#import "AHTagTableViewCell.h"
+
+
+@interface optionTableViewController ()
+
+@end
+
+@implementation NSArray (Extensions)
+
+- (NSArray *)map:(id (^)(id obj))block {
+    NSMutableArray *mutableArray = [NSMutableArray new];
+    [self enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [mutableArray addObject:block(obj)];
+    }];
+    return mutableArray;
+}
+
+@end
+
+@implementation optionTableViewController {
+    NSArray<NSArray<AHTag *> *> *_dataSource;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.title = @"TAGS";
+    
+    _dataSource = [self parseJSON];
+    
+    UINib *nib = [UINib nibWithNibName:@"AHTagTableViewCell" bundle:nil];
+    [self.tableView registerNib:nib forCellReuseIdentifier:@"cell"];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (NSArray *)parseJSON {
+    NSError *error;
+    NSURL *URL= [[NSBundle mainBundle] URLForResource:@"TagGroups" withExtension:@"json"];
+    NSData *data = [NSData dataWithContentsOfURL:URL];
+    NSArray *objects = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
+    
+    return [objects map:^id(id obj) {
+        return [(NSArray *)obj map:^id(id obj) { return [(NSDictionary *)obj tag]; }];
+    }];
+}
+
+#pragma mark - UITableViewDataSource
+
+- (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return _dataSource[section][0].category;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 1;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return _dataSource.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    [self configureCell:cell atIndexPath:indexPath];
+    return cell;
+}
+
+- (void)configureCell:(id)object atIndexPath:(NSIndexPath *)indexPath {
+    if (![object isKindOfClass:[AHTagTableViewCell class]]) {
+        return;
+    }
+    AHTagTableViewCell *cell = (AHTagTableViewCell *)object;
+    cell.label.tags = _dataSource[indexPath.section];
+}
+
+#pragma mark - UITableViewDelegate
+
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 50;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewAutomaticDimension;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
+    UITableViewHeaderFooterView *v = (UITableViewHeaderFooterView *)view;
+    v.textLabel.textColor = [UIColor darkGrayColor];
+}
+
+@end
